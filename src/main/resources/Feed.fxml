@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.PostController">
+    <!-- Top Navigation Bar -->
+    <top>
+        <HBox spacing="10" style="-fx-background-color: #333;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <children>
+                <Label text="Navbar" style="-fx-text-fill: white; -fx-font-size: 16;"/>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Left Sidebar -->
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #ccc;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <children>
+                <Label text="Sidebar" style="-fx-font-size: 14;"/>
+            </children>
+        </VBox>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <VBox spacing="20">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <!-- Create Post Box -->
+            <VBox spacing="10" style="-fx-border-color: #ddd; -fx-border-radius: 8; -fx-padding: 15;">
+                <children>
+                    <Label text="Create Your Post" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+                    <HBox spacing="10">
+                        <TextField fx:id="postContentField" promptText="What's on your mind?" HBox.hgrow="ALWAYS"/>
+                        <Button text="Create" onAction="#handleCreatePost"/>
+                    </HBox>
+                    <HBox spacing="10">
+                        <Button fx:id="photoButton" text="📷 Add Photo" onAction="#handleAddPhoto"/>
+                    </HBox>
+                    <ImageView fx:id="postImageView" fitWidth="300" fitHeight="200" preserveRatio="true"/>
+                </children>
+            </VBox>
+
+            <!-- Posts Feed -->
+            <VBox spacing="10">
+                <Label text="Total number of posts: X" style="-fx-font-size: 16; -fx-text-fill: #3498db;"/>
+                <!-- Example Post -->
+                <VBox spacing="10" style="-fx-border-color: #ddd; -fx-border-radius: 8; -fx-padding: 15;">
+                    <!-- Post Header -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <ImageView fx:id="avatarImage" fitWidth="50" fitHeight="30" preserveRatio="true">
+                            <image>
+                                <Image url="@/images/avatar.jpg"/>
+                            </image>
+                        </ImageView>
+                        <VBox spacing="2">
+                            <Label text="Username" style="-fx-font-weight: bold;"/>
+                            <Label text="YYYY-MM-DD HH:MM:SS" style="-fx-font-size: 10;"/>
+                        </VBox>
+                        <Button text="Favorite" HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <!-- Post Content -->
+                    <Label text="Post Content" wrapText="true"/>
+                    <ImageView fx:id="postImage" fitWidth="300" fitHeight="300" preserveRatio="true" visible="false"/>
+
+                    <!-- Post Stats -->
+                    <HBox spacing="10">
+                        <Button text="Like"/>
+                        <Label text="Like Count"/>
+                    </HBox>
+
+                    <!-- Comments Section -->
+                    <VBox spacing="5">
+                        <Label text="Comments (X)" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+                        <!-- Example Comment -->
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Label text="Comment Author:" style="-fx-font-weight: bold;"/>
+                            <Label text="Comment Content"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- Comment Box -->
+                    <HBox spacing="10">
+                        <TextField fx:id="commentField" promptText="Post a comment..." HBox.hgrow="ALWAYS"/>
+                        <Button text="Post"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

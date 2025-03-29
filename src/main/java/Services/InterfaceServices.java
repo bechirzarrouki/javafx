@@ -10,7 +10,6 @@ public interface InterfaceServices <T>{
 
     public List<T> afficher();
 
-    public T getone();
 
 
 

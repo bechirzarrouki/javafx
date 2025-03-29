@@ -16,6 +16,16 @@ public class User {
         this.role=("ROLE_USER"); // Default role
     }
 
+    public User(Integer id, String username, String email, String password, Integer number, String profileImage, Boolean banned) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.number = number;
+        this.profileImage = profileImage;
+        this.banned = banned;
+    }
+
     // Getters and Setters
     public Integer getId() {
         return id;

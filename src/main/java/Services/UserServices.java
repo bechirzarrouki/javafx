@@ -8,17 +8,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserService implements InterfaceServices<User> {
+public class UserServices implements InterfaceServices<User> {
 
     private final Connection cnx;
 
-    public UserService() {
+    public UserServices() {
         cnx = DatabaseConnection.getInstance().getCnx();
     }
 
     @Override
     public void add(User user) {
-        String query = "INSERT INTO user (username, email, password, number, profileImage, role, banned) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user (username, email, password, number, profile_image, banned) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement stm = cnx.prepareStatement(query);
@@ -27,8 +27,7 @@ public class UserService implements InterfaceServices<User> {
             stm.setString(3, user.getPassword());
             stm.setInt(4, user.getNumber() != null ? user.getNumber() : 0);
             stm.setString(5, user.getProfileImage());
-            stm.setString(6, user.getRole());
-            stm.setBoolean(7, user.isBanned());
+            stm.setBoolean(6, user.isBanned());
 
             stm.executeUpdate();
         } catch (SQLException e) {
@@ -84,33 +83,5 @@ public class UserService implements InterfaceServices<User> {
         }
 
         return users;
-    }
-
-    @Override
-    public User getone(int id) {
-        String query = "SELECT * FROM user WHERE id=?";
-        User user = null;
-
-        try {
-            PreparedStatement stm = cnx.prepareStatement(query);
-            stm.setInt(1, id);
-            ResultSet rs = stm.executeQuery();
-
-            if (rs.next()) {
-                user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
-                user.setNumber(rs.getInt("number"));
-                user.setProfileImage(rs.getString("profileImage"));
-                user.setRole(rs.getString("role"));
-                user.setBanned(rs.getBoolean("banned"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return user;
     }
 }
