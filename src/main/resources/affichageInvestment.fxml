@@ -1,0 +1,67 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.input.MouseEvent?>
+
+<VBox xmlns:fx="http://javafx.com/fxml">
+    <!-- Title Section -->
+    <HBox>
+        <Text text="Home - Purple Social" />
+    </HBox>
+
+
+
+    <!-- Investment List Section -->
+    <VBox fx:id="postContainer">
+
+            <VBox fx:id="mainWrapper">
+                <HBox>
+                    <!-- Profile Section -->
+                    <ImageView fx:id="profileImage"  />
+                    <VBox>
+                        <Text fx:id="username" />
+                    </VBox>
+                    <!-- Like Button -->
+                    <Button fx:id="likeBtn"  />
+                    <Text fx:id="investmentDate" />
+                </HBox>
+
+                <Text fx:id="investmentContent"/>
+
+                <VBox fx:id="investmentDetails">
+                    <Text text="Returns" />
+                    <VBox fx:id="returnsList"></VBox>
+                </VBox>
+            </VBox>
+
+    </VBox>
+
+    <!-- Message Modal Section -->
+    <VBox fx:id="messageModal" style="-fx-display: none;">
+        <HBox>
+            <Button text="Close"  />
+        </HBox>
+        <Text text="New Message" />
+
+        <Button text="Send" />
+    </VBox>
+
+    <!-- Suggested Users Section -->
+    <VBox fx:id="suggestedUsersSidebar">
+        <ListView fx:id="userList">
+
+                <HBox>
+                    <ImageView fx:id="userProfileImage"  />
+                    <VBox>
+                        <Text fx:id="userUsername" />
+                    </VBox>
+                    <Button text="Follow"  />
+                </HBox>
+
+        </ListView>
+    </VBox>
+</VBox>

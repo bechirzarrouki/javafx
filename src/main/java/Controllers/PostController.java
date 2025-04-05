@@ -35,7 +35,7 @@ public class PostController {
         }
         //task
         //change the user when the session is added
-        User newUser = new User(28,"john_doe", "john.doe@example.com", "securepassword",123456789,"profile.jpg",false);
+        User newUser = new User(6,"john_doe", "john.doe@example.com", "securepassword",123456789,"profile.jpg",false);
         try {
             Path destinationFolder = Paths.get("src/main/resources/images");
             String fileName = System.currentTimeMillis() + "_" + selectedFile.getName();

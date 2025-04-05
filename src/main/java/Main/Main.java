@@ -14,7 +14,7 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception {
         // Ensure the FXML file is placed in src/main/resources
-        Parent root = FXMLLoader.load(getClass().getResource("/Feed.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/investment.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setTitle("My JavaFX App");
         primaryStage.setScene(scene);
