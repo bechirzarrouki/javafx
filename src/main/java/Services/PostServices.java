@@ -62,15 +62,27 @@ public class PostServices {
 
     public List<Post> getAll() {
         List<Post> posts = new ArrayList<>();
-        String query = "SELECT * FROM post";
+        String query = "SELECT p.*, u.* FROM post p INNER JOIN user u ON p.author_id = u.id;";
         try {
             Statement stm = cnx.createStatement();
             ResultSet rs = stm.executeQuery(query);
+
             while (rs.next()) {
                 Post post = new Post();
                 post.setId(rs.getInt("id"));
                 post.setContent(rs.getString("content"));
                 post.setImage(rs.getString("image"));
+
+                // Set user details (assuming user information is also stored in the post table)
+                User user = new User();
+                user.setId(rs.getInt("author_id"));
+                user.setUsername(rs.getString("username"));
+                user.setProfileImage(rs.getString("profile_image"));
+
+                post.setAuthor(user);
+
+                // Set other necessary fields if available
+                post.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
 
                 posts.add(post);
             }

@@ -82,11 +82,15 @@ public class Post {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-
-    public List<User> getLikes() {
-        return likes;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
+    public int getLikes() {
+        return likes.size();
+    }
+    public void setLikes(){
 
+    }
     public void addLike(User user) {
         if (!likes.contains(user)) {
             likes.add(user);
