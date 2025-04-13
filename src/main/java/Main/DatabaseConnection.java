@@ -1,4 +1,3 @@
-
 package Main;
 
 import java.sql.Connection;
@@ -7,37 +6,38 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    Connection cnx;
+    private Connection cnx;
+    private static DatabaseConnection instance;
 
     public Connection getCnx() {
         return cnx;
     }
 
-    public static DatabaseConnection instance;
-    public DatabaseConnection(){
-
-
-
-        String Url="jdbc:mysql://localhost:3306/pi";
-        String Username="root";
-        String Password="";
+    private DatabaseConnection() {
+        String url = "jdbc:mysql://localhost:3306/pi";
+        String username = "root";
+        String password = "";
 
         try {
-            cnx= DriverManager.getConnection(Url,Username,Password);
-            System.out.println("connexion etablie");
+            // Charger explicitement le driver MySQL
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            // Établir la connexion
+            cnx = DriverManager.getConnection(url, username, password);
+            System.out.println("Connexion établie avec succès");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Erreur SQL lors de la connexion : " + e.getMessage());
+            throw new RuntimeException("Erreur de connexion à la base de données : " + e.getMessage(), e);
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver MySQL non trouvé : " + e.getMessage());
+            throw new RuntimeException("Driver MySQL non trouvé. Assurez-vous que le driver est dans le classpath.", e);
         }
-
     }
 
-    public static DatabaseConnection getInstance(){
-        if(instance==null){
-            return   instance=new DatabaseConnection();
+    public static DatabaseConnection getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnection();
         }
         return instance;
-
-
     }
-
 }
