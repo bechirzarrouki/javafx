@@ -127,6 +127,15 @@ public class SignUpController {
         try {
             Connection conn = DatabaseConnection.getInstance().getCnx();
             
+            // First, let's check the table structure and ENUM values
+            DatabaseMetaData metaData = conn.getMetaData();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SHOW COLUMNS FROM user WHERE Field = 'roles'");
+            if (rs.next()) {
+                String type = rs.getString("Type");
+                System.out.println("Full roles column type definition: " + type);
+            }
+            
             // Check if username already exists
             PreparedStatement checkUsername = conn.prepareStatement("SELECT COUNT(*) FROM user WHERE username = ?");
             checkUsername.setString(1, username);
@@ -150,38 +159,81 @@ public class SignUpController {
             }
             
             // If all validations pass, insert new user
+            // Build roles string based on selected checkboxes
+            StringBuilder roles = new StringBuilder();
+            if (employeeCheckBox.isSelected()) {
+                roles.append("ROLE_EMPLOYEE");
+            }
+            if (investorCheckBox.isSelected()) {
+                if (roles.length() > 0) roles.append(",");
+                roles.append("ROLE_INVESTOR");
+            }
+            if (projectLeaderCheckBox.isSelected()) {
+                if (roles.length() > 0) roles.append(",");
+                roles.append("ROLE_PROJECT_LEADER");
+            }
+            // If no role is selected, set default role
+            if (roles.length() == 0) {
+                roles.append("ROLE_EMPLOYEE"); // Default to employee since we don't have a generic user role
+            }
+            
+            String rolesString = roles.toString();
+            System.out.println("Attempting to insert roles: " + rolesString);
+            
+            // Print out all values being inserted
+            System.out.println("Username: " + username);
+            System.out.println("Email: " + email);
+            System.out.println("Number: " + number);
+            System.out.println("Role: " + rolesString);
+            
+            // Create prepared statement
             String query = "INSERT INTO user (username, email, number, password, roles) VALUES (?, ?, ?, ?, ?)";
+            System.out.println("SQL Query: " + query);
+            
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, email);
             ps.setInt(3, Integer.parseInt(number));
             ps.setString(4, BCrypt.hashpw(password, BCrypt.gensalt()));
-            ps.setString(5, "ROLE_USER");
+            ps.setString(5, rolesString);
 
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                showSuccess("Account created successfully! You can customize your profile picture in your profile settings.");
-                
-                // Refresh admin dashboard if it exists
-                Stage currentStage = (Stage) usernameField.getScene().getWindow();
-                for (Window window : Stage.getWindows()) {
-                    if (window instanceof Stage && window != currentStage) {
-                        Scene scene = ((Stage) window).getScene();
-                        if (scene != null && scene.getRoot().getId() != null && scene.getRoot().getId().equals("adminDashboard")) {
-                            AdminDashboardController controller = (AdminDashboardController) scene.getUserData();
-                            if (controller != null) {
-                                controller.refreshTable();
+            try {
+                int result = ps.executeUpdate();
+                if (result > 0) {
+                    // Build a personalized welcome message
+                    StringBuilder welcomeMsg = new StringBuilder();
+                    welcomeMsg.append("Welcome to our platform, ").append(username).append("! \n\n");
+                    welcomeMsg.append("Your account has been successfully created with the following role");
+                    welcomeMsg.append(rolesString.contains(",") ? "s" : "").append(": ");
+                    welcomeMsg.append(rolesString.replace("ROLE_", "").replace("_", " ").toLowerCase());
+                    welcomeMsg.append("\n\nYou will be redirected to the login page in a moment...");
+                    
+                    showSuccess(welcomeMsg.toString());
+                    
+                    // Refresh admin dashboard if it exists
+                    Stage currentStage = (Stage) usernameField.getScene().getWindow();
+                    for (Window window : Stage.getWindows()) {
+                        if (window instanceof Stage && window != currentStage) {
+                            Scene scene = ((Stage) window).getScene();
+                            if (scene != null && scene.getRoot().getId() != null && scene.getRoot().getId().equals("adminDashboard")) {
+                                AdminDashboardController controller = (AdminDashboardController) scene.getUserData();
+                                if (controller != null) {
+                                    controller.refreshTable();
+                                }
                             }
                         }
                     }
-                }
 
-                // Clear the form
-                clearForm();
-                // Add a small delay before navigating to login
-                PauseTransition pause = new PauseTransition(Duration.seconds(1));
-                pause.setOnFinished(e -> navigateToLogin());
-                pause.play();
+                    // Clear the form
+                    clearForm();
+                    // Add a small delay before navigating to login
+                    PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                    pause.setOnFinished(e -> navigateToLogin());
+                    pause.play();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                showError("Error registering user: " + e.getMessage());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -232,7 +284,13 @@ public class SignUpController {
 
     private void showSuccess(String message) {
         errorLabel.setText(message);
+        errorLabel.setStyle("-fx-text-fill: #2ecc71; -fx-font-size: 14px; -fx-padding: 10px;");
         AnimationUtils.pulseAnimation(errorLabel);
+        
+        // Reset style after navigation
+        PauseTransition resetStyle = new PauseTransition(Duration.seconds(10));
+        resetStyle.setOnFinished(e -> errorLabel.setStyle(""));
+        resetStyle.play();
     }
 
     private void clearForm() {
