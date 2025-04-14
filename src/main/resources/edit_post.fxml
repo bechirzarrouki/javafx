@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.EditPostController" alignment="CENTER" style="-fx-padding: 20;">
+    <TextField fx:id="contentField" promptText="Edit your post content" />
+    <ImageView fx:id="imageView" fitWidth="200" preserveRatio="true"/>
+    <Button text="Choose New Image" onAction="#handleChooseImage" />
+    <HBox spacing="10">
+        <Button text="Save" onAction="#handleSave"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </HBox>
+</VBox>

@@ -104,4 +104,29 @@ public class CommentServices {
         }
         return null;
     }
+    public List<Comment> getAllByPostId(int postId) {
+        List<Comment> comments = new ArrayList<>();
+        String req = "SELECT * FROM comment WHERE post_id = ?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, postId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Comment comment = new Comment();
+                comment.setId(rs.getInt("id"));
+                comment.setContent(rs.getString("content"));
+                comment.setDateCreation(rs.getTimestamp("date_creation").toLocalDateTime());
+                comment.setDateModification(rs.getTimestamp("date_modification").toLocalDateTime());
+
+                // Optional: set the post object if needed
+                // comment.setPost(postService.findById(postId));
+
+                comments.add(comment);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return comments;
+    }
+
 }

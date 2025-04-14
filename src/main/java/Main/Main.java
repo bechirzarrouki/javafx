@@ -1,9 +1,6 @@
 package Main;
 
-import Models.User;
-import Models.Post;
-import Services.UserServices;
-import Services.PostServices;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
