@@ -1,22 +1,22 @@
 package Models;
 
 import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 public class TReturn {
     private Integer id;
-    private Integer investmentId; // Clé étrangère vers Investment
+    private Investment investment; // Clé étrangère vers Investment
     private String description;
     private String returnType;
-    private Integer Rendement;
-    private LocalDateTime deadline;
+    private Double Rendement;
+    private LocalDate deadline;
     private String status;
 
     public TReturn() {
     }
 
-    public TReturn(Integer id, Integer investmentId, String description, String returnType, Integer Rendement, LocalDateTime deadline, String status) {
+    public TReturn(Integer id, Investment investment, String description, String returnType, Double Rendement, LocalDate deadline, String status) {
         this.id = id;
-        this.investmentId = investmentId;
+        this.investment = investment;
         this.description = description;
         this.returnType = returnType;
         this.Rendement = Rendement;
@@ -33,12 +33,12 @@ public class TReturn {
         this.id = id;
     }
 
-    public Integer getInvestmentId() {
-        return investmentId;
+    public Investment getInvestment() {
+        return investment;
     }
 
-    public void setInvestmentId(Integer investmentId) {
-        this.investmentId = investmentId;
+    public void setInvestmentId(Investment investment) {
+        this.investment = investment;
     }
 
     public String getDescription() {
@@ -57,19 +57,19 @@ public class TReturn {
         this.returnType = returnType;
     }
 
-    public Integer getRendement() {
+    public Double getRendement() {
         return Rendement;
     }
 
-    public void setRendement(Integer taxRendement) {
+    public void setRendement(Double taxRendement) {
         this.Rendement = taxRendement;
     }
 
-    public LocalDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
@@ -85,7 +85,7 @@ public class TReturn {
     public String toString() {
         return "Return{" +
                 "id=" + id +
-                ", investmentId=" + investmentId +
+                ", investmentId=" + investment +
                 ", description='" + description + '\'' +
                 ", returnType='" + returnType + '\'' +
                 ", Rendement=" + Rendement +

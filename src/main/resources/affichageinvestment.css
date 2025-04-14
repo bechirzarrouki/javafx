@@ -1,0 +1,127 @@
+/* Global font */
+.root {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-base: #f4f4f9; /* Light background for the base */
+}
+
+/* Sidebar */
+.sidebar {
+    -fx-background-color: #34495e; /* Darker shade for the sidebar */
+    -fx-padding: 20;
+    -fx-pref-width: 220;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0); /* Adds shadow for depth */
+}
+
+.menu-item {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 12 0;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+    -fx-background-insets: 0;
+    -fx-background-radius: 5;
+}
+
+.menu-item:hover {
+    -fx-background-color: #5d6d7e;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+}
+
+/* Navbar */
+.navbar {
+    -fx-background-color: #1e90ff; /* Bright blue for navbar */
+    -fx-padding: 12 25;
+    -fx-border-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0); /* Add shadow to navbar */
+}
+
+.navbar-item {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Investment Box */
+.investment-box {
+    -fx-background-color: #ffffff; /* White background for clean look */
+    -fx-padding: 25;
+    -fx-border-radius: 20;
+    -fx-border-color: #dcdde1;
+    -fx-border-width: 2;
+    -fx-max-width: 500;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0, 0); /* Adds soft shadow */
+    -fx-margin: 15 0;
+}
+
+.title-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #34495e; /* Dark gray text */
+}
+
+.subtitle-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #7f8c8d; /* Slightly lighter gray */
+}
+
+/* Input Style */
+.input-style {
+    -fx-pref-width: 320;
+    -fx-padding: 12;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ced6e0;
+    -fx-border-radius: 8;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.5, 0, 0);
+}
+
+/* Selected Type Label */
+.selected-type-label {
+    -fx-font-size: 15px;
+    -fx-text-fill: #2c3e50; /* Darker text for better readability */
+    -fx-font-weight: semi-bold;
+}
+
+/* Date Label */
+.date-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #95a5a6; /* Light gray */
+    -fx-padding: 0 15 0 0;
+}
+
+/* Photo Frame (Profile Picture) */
+.photo-frame {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 12;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-border-color: #dcdde1;
+    -fx-border-width: 1.5;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.5, 0, 0);
+}
+
+/* Button Hover Effects */
+.button:hover {
+    -fx-background-color: #1e90ff;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+/* Message input styling */
+.text-area {
+    -fx-pref-height: 100;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10;
+    -fx-border-color: #ced6e0;
+    -fx-border-width: 1.5;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+}
+
+.text-area:focused {
+    -fx-border-color: #1e90ff;
+    -fx-effect: inset, dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.5, 0, 0);
+}

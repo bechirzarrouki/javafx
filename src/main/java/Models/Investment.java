@@ -7,6 +7,7 @@ public class Investment {
     private Integer id;
     private String content;
     private List<String> investmentTypes;
+    private User user;
     private LocalDateTime createdAt;
 
     public Investment() {
@@ -28,7 +29,12 @@ public class Investment {
     public void setId(Integer id) {
         this.id = id;
     }
-
+    public User getUser(){
+        return this.user;
+    }
+    public void setUser(User user){
+        this.user = user;
+    }
     public String getContent() {
         return content;
     }

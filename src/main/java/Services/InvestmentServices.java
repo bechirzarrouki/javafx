@@ -2,12 +2,14 @@ package Services;
 
 import Models.Investment;
 import Main.DatabaseConnection;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InvestmentServices {
+
     private Connection cnx;
 
     public InvestmentServices() {
@@ -15,12 +17,14 @@ public class InvestmentServices {
     }
 
     public void add(Investment investment) {
-        String query = "INSERT INTO investment (content, investment_types, created_at) VALUES (?, ?, ?)";
+        String query = "INSERT INTO investment (content,user_id, investment_types, created_at) VALUES (?,?,?,?)";
         try {
             PreparedStatement stm = cnx.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, investment.getContent());
-            stm.setString(2, String.join(",", investment.getInvestmentTypes()));
-            stm.setTimestamp(3, Timestamp.valueOf(investment.getCreatedAt()));
+            stm.setInt(2, investment.getUser().getId());
+            System.out.println(String.join(",", investment.getInvestmentTypes()));
+            stm.setString(3, String.join(",", investment.getInvestmentTypes()));
+            stm.setTimestamp(4, Timestamp.valueOf(investment.getCreatedAt()));
 
             stm.executeUpdate();
             ResultSet rs = stm.getGeneratedKeys();
@@ -52,6 +56,9 @@ public class InvestmentServices {
             PreparedStatement stm = cnx.prepareStatement(query);
             stm.setInt(1, investmentId);
             stm.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {//add alert
+            showAlert("Erreur", "you have to delete the returns related to this investment first");
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -98,5 +105,12 @@ public class InvestmentServices {
             throw new RuntimeException(e);
         }
         return null;
+    }
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

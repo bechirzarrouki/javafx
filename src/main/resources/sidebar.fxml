@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" stylesheets="@sidebar.css" xmlns:fx="http://javafx.com/fxml/1">
+
+    <left>
+        <VBox fx:id="sidebar" styleClass="sidebar" prefWidth="200">
+            <padding>
+                <Insets top="60.0" />
+            </padding>
+
+            <children>
+                <!-- Boutons avec nom visible -->
+                <Button styleClass="menu-item" text="Menu" />
+                <Button fx:id="createInvestmentBtn" styleClass="menu-item" text="Create Investment" />
+                <Button fx:id="investmentsBtn" styleClass="menu-item" text="Investments" />
+                <Button fx:id="projectsBtn" styleClass="menu-item" text="Projects" />
+                <Button fx:id="coursesBtn" styleClass="menu-item" text="Courses" />
+                <Button styleClass="menu-item" text="Log out" />
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <!-- Zone principale -->
+        <StackPane fx:id="contentArea" />
+    </center>
+</BorderPane>

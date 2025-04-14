@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" spacing="20" style="-fx-padding: 20;">
+    <!-- Navbar would typically be a separate FXML component included here -->
+
+    <!-- Dropdown container -->
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Sélectionnez une option :"/>
+        <ComboBox fx:id="selectOption" >
+            <!-- Items would be populated in the controller -->
+        </ComboBox>
+    </HBox>
+
+    <!-- Graphs container -->
+    <HBox spacing="20" alignment="CENTER">
+        <!-- Bar Chart -->
+        <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 4, 8, 0, 0); -fx-background-radius: 8;">
+            <Label text="Graphique en Barres" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+            <BarChart fx:id="barChart">
+                <xAxis>
+                    <CategoryAxis label="Years" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Votes" lowerBound="0"/>
+                </yAxis>
+            </BarChart>
+        </VBox>
+
+        <!-- Area Chart -->
+        <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 4, 8, 0, 0); -fx-background-radius: 8;">
+            <Label text="Graphique en Aire" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+            <AreaChart fx:id="areaChart">
+                <xAxis>
+                    <CategoryAxis label="Years" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Votes" lowerBound="0"/>
+                </yAxis>
+            </AreaChart>
+        </VBox>
+    </HBox>
+</VBox>

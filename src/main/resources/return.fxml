@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:controller="Controllers.affichageReturns" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1"
+          stylesheets="return.css" prefHeight="600" prefWidth="800" alignment="CENTER">
+
+    <columnConstraints>
+        <ColumnConstraints minWidth="200" prefWidth="200" />
+        <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
+
+    <!-- Sidebar -->
+    <fx:include source="sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+    <!-- Contenu principal -->
+    <VBox spacing="20" alignment="TOP_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <fx:include source="navbar.fxml" />
+        <Label text="Your Investment Returns" styleClass="title-label" />
+
+        <!-- Pagination des retours -->
+        <Pagination fx:id="pagination" pageCount="1" maxPageIndicatorCount="5" />
+
+        <ScrollPane fitToWidth="true" prefHeight="500" styleClass="transparent-scroll">
+            <VBox fx:id="returnListContainer" spacing="15" alignment="TOP_CENTER" style="-fx-padding: 20;">
+                <!-- Box dynamique ajoutée par le contrôleur -->
+            </VBox>
+        </ScrollPane>
+    </VBox>
+</GridPane>
