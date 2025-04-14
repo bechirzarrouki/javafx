@@ -4,21 +4,29 @@ import Main.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
+import javafx.application.Platform;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class LoginController {
+public class LoginController implements Initializable {
 
     @FXML
     private TextField usernameField;
@@ -38,6 +46,47 @@ public class LoginController {
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private StackPane leftPanel;
+
+    private MediaPlayer mediaPlayer;
+
+    @FXML
+    private ImageView gifImageView;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Platform.runLater(() -> {
+            try {
+                // Create MediaView programmatically
+                MediaView mediaView = new MediaView();
+
+                // Load the video file
+                String videoPath = getClass().getResource("/media/gif.gif").toExternalForm();
+                Media media = new Media(videoPath);
+                mediaPlayer = new MediaPlayer(media);
+                mediaView.setMediaPlayer(mediaPlayer);
+                
+                // Configure video playback
+                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                mediaPlayer.setAutoPlay(true);
+                mediaPlayer.setMute(true);
+                
+                // Make video responsive
+                mediaView.fitWidthProperty().bind(leftPanel.widthProperty());
+                mediaView.fitHeightProperty().bind(leftPanel.heightProperty());
+                mediaView.setPreserveRatio(true);
+                
+                // Add MediaView as the first child of StackPane (background)
+                leftPanel.getChildren().add(0, mediaView);
+                
+            } catch (Exception e) {
+                System.err.println("Error loading video: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+        // You can add any initialization code here if needed
+    }
 
     @FXML
     private void handleLogin(ActionEvent event) {

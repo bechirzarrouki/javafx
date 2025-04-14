@@ -2,8 +2,9 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -16,14 +17,16 @@
           AnchorPane.leftAnchor="0.0" 
           AnchorPane.rightAnchor="0.0">
         
-        <!-- Left side - Image -->
-        <VBox alignment="CENTER" styleClass="login-left-panel" HBox.hgrow="ALWAYS">
-            <ImageView fitWidth="300.0" preserveRatio="true">
-                <Image url="@/images/innovmatch-logo.png"/>
+        <!-- Left side -->
+        <StackPane fx:id="leftPanel" styleClass="login-left-panel" HBox.hgrow="ALWAYS">
+            <!-- GIF background -->
+            <ImageView fx:id="gifBackground" fitWidth="400.0" fitHeight="600.0" preserveRatio="true" pickOnBounds="true">
+                <image>
+                    <Image url="@/media/gif.gif" preserveRatio="true" />
+                </image>
             </ImageView>
-            <Label text="Welcome to InnovMatch" styleClass="welcome-text"/>
-            <Label text="Connect. Innovate. Succeed." styleClass="slogan-text"/>
-        </VBox>
+
+        </StackPane>
 
         <!-- Right side - Login Form -->
         <VBox alignment="CENTER" spacing="20.0" styleClass="login-form-panel" HBox.hgrow="ALWAYS">

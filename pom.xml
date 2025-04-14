@@ -12,6 +12,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <javafx.version>17.0.2</javafx.version>
     </properties>
     <dependencies>
         <dependency>
@@ -29,7 +30,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>21.0.2</version> <!-- Use version 17 for Java 17 -->
+            <version>21.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -39,6 +40,16 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
+            <version>21.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>21.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
             <version>21.0.2</version>
         </dependency>
     </dependencies>
@@ -57,7 +68,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>Main.Main</mainClass> <!-- Ensure this is your actual package and class name -->
+                    <mainClass>Controllers.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
