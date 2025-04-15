@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.controllers.BackController" spacing="20" style="-fx-background-color: #f5f5f5;">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox spacing="20" alignment="CENTER_LEFT">
+        <Text text="Course Management" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-fill: #53348D;"/>
+        <Button text="Add New Course" onAction="#showAddCourseForm" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    </HBox>
+
+    <FlowPane fx:id="coursesGrid" hgap="20" vgap="20" prefWrapLength="1000"/>
+</VBox> 

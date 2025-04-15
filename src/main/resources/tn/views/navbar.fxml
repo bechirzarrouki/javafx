@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.controllers.NavbarController"
+      style="-fx-background-color: #53348D; -fx-padding: 10 20; -fx-spacing: 20; -fx-alignment: center-left; -fx-pref-height: 60;">
+    
+    <Label text="InnovMatch" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+    
+    <Region HBox.hgrow="ALWAYS"/>
+    
+    <HBox spacing="20">
+        <Button text="Home" onAction="#handleHome" 
+                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-cursor: hand;"/>
+        <Button text="Courses" onAction="#handleCourses" 
+                style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-cursor: hand;"/>
+    </HBox>
+</HBox> 

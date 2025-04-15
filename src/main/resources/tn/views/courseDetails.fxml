@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.controllers.CourseDetailsController"
+      style="-fx-background-color: #f5f5f5; -fx-padding: 20;" spacing="20">
+    
+    <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+        <HBox spacing="20">
+            <ImageView fx:id="courseImage" fitWidth="400" fitHeight="300" preserveRatio="true"/>
+            <VBox spacing="10">
+                <Label fx:id="courseName" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #53348D;"/>
+                <Label fx:id="courseDescription" wrapText="true" maxWidth="400"/>
+                
+                <GridPane vgap="10" hgap="20">
+                    <Label text="Duration:" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="durationLabel" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Type:" style="-fx-font-weight: bold;" GridPane.rowIndex="1"/>
+                    <Label fx:id="typeLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    
+                    <Label text="Price:" style="-fx-font-weight: bold;" GridPane.rowIndex="2"/>
+                    <Label fx:id="priceLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    
+                    <Label text="Language:" style="-fx-font-weight: bold;" GridPane.rowIndex="3"/>
+                    <Label fx:id="languageLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    
+                    <Label text="Level:" style="-fx-font-weight: bold;" GridPane.rowIndex="4"/>
+                    <Label fx:id="levelLabel" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                </GridPane>
+                
+                <HBox spacing="10" style="-fx-padding: 20 0 0 0;">
+                    <Button text="Take Quiz" onAction="#startQuiz" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 16;"/>
+                    <Button text="Back" onAction="#goBack" style="-fx-background-color: #666; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 16;"/>
+                </HBox>
+            </VBox>
+        </HBox>
+    </VBox>
+</VBox> 
