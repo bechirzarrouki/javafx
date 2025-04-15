@@ -21,8 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class affichageReturns {
-
+public class AdminaffichageReturns {
     private Investment investment;
     private final TReturnService service = new TReturnService();
     private static final int ITEMS_PER_PAGE = 5;
@@ -84,7 +83,7 @@ public class affichageReturns {
 
         // Correction ici avec () -> au lieu de event ->
         buttonBox.getChildren().addAll(
-                createActionButton("Edit", "edit-button", () -> editReturn(tReturn)),
+
                 createActionButton("Delete", "delete-button", () -> deleteReturn(tReturn))
         );
 
@@ -112,33 +111,11 @@ public class affichageReturns {
         return button;
     }
 
-    private void editReturn(TReturn tReturn) {
-        try {
-            // Correction du nom du fichier FXML (typo)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/updatereturne.fxml"));
-            Parent root = loader.load();
 
-            // Correction du nom du contrôleur (case sensitive)
-            updateReturnController controller = loader.getController();
-
-            // Correction du nom de la méthode setReturn
-            controller.setReturn(tReturn);
-            controller.setRefreshCallback(this::updatePagination);
-
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Edit Return");
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error loading update form: " + e.getMessage());
-        }
-    }
 
     private void deleteReturn(TReturn tReturn) {
         service.delete(tReturn.getId());
         updatePagination();
     }
+
 }

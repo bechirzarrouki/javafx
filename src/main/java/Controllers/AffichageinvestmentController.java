@@ -39,30 +39,40 @@ public class AffichageinvestmentController {
     // Méthode pour créer la box d'un investissement
     private VBox createInvestmentBox(Investment investment) {
         VBox investmentBox = new VBox(10);
-        investmentBox.setStyle("-fx-border-color: #ddd; -fx-border-radius: 8; -fx-padding: 15; -fx-background-color: #f9f9f9;");
-        investmentBox.setOnMouseEntered(e -> investmentBox.setStyle("-fx-border-color: #ddd; -fx-border-radius: 8; -fx-padding: 15; -fx-background-color: #e6f7ff;"));
-        investmentBox.setOnMouseExited(e -> investmentBox.setStyle("-fx-border-color: #ddd; -fx-border-radius: 8; -fx-padding: 15; -fx-background-color: #f9f9f9;"));
+        investmentBox.getStyleClass().add("investment-box");
 
         // Contenu de l'investissement
         Label contentLabel = new Label(investment.getContent());
+        contentLabel.getStyleClass().add("investment-content");
         contentLabel.setWrapText(true);
 
         // Affichage du type d'investissement
         Label typesLabel = new Label("Types: " + String.join(", ", investment.getInvestmentTypes()));
+        typesLabel.getStyleClass().add("investment-types");
 
         // Affichage de la date de création
         Label dateLabel = new Label("Created At: " + investment.getCreatedAt().toString());
-        dateLabel.setStyle("-fx-font-size: 10; -fx-font-weight: lighter;");
+        dateLabel.getStyleClass().add("investment-date");
 
         // Action Buttons
         HBox buttonBox = new HBox(10);
+        buttonBox.getStyleClass().add("button-container");
 
-        // Variable locale pour compter les likes
+        // Compteur de likes
         final int[] likesCount = {0};
         Label likesLabel = new Label("Likes: " + likesCount[0]);
+        likesLabel.getStyleClass().add("likes-label");
 
-        // Bouton Like/Dislike
         Button likeDislikeButton = new Button("Like");
+        likeDislikeButton.getStyleClass().add("like-button");
+
+
+
+
+        Button openMessagesButton = new Button("Open Messages");
+        openMessagesButton.getStyleClass().add("action-button");
+
+        // Gestion des événements
         likeDislikeButton.setOnAction(event -> {
             if (likeDislikeButton.getText().equals("Like")) {
                 likesCount[0]++;
@@ -74,34 +84,22 @@ public class AffichageinvestmentController {
             likesLabel.setText("Likes: " + likesCount[0]);
         });
 
-        // Bouton pour voir les returns
-        Button viewReturnsButton = new Button("Add Returns");
-        viewReturnsButton.setOnAction(event -> openReturnsPage(investment));
 
-        // Bouton pour ouvrir la page des messages
-        Button openMessagesButton = new Button("Open Messages");
         openMessagesButton.setOnAction(event -> openMessagesPage(investment));
 
-        // Ajouter les boutons dans le box
-        buttonBox.getChildren().addAll(likeDislikeButton, likesLabel, viewReturnsButton, openMessagesButton);
-
-        // Ajouter tous les éléments dans la box
+        buttonBox.getChildren().addAll(likeDislikeButton, likesLabel, openMessagesButton);
         investmentBox.getChildren().addAll(contentLabel, typesLabel, dateLabel, buttonBox);
 
-        // 👉 Ajouter l'action au clic sur toute la box
-        investmentBox.setOnMouseClicked(event -> {
-            openInvestmentDetailsPage(investment); // nouvelle méthode qu'on va écrire
-        });
+        investmentBox.setOnMouseClicked(event -> openInvestmentDetailsPage(investment));
 
         return investmentBox;
     }
-
     private void openInvestmentDetailsPage(Investment investment) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/investmentdetails.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Userreturn.fxml"));
             Parent root = loader.load();
 
-            affichageReturns controller = loader.getController();
+            UseraffichageReturns controller = loader.getController();
             controller.setInvestment(investment); // passe directement l'objet ou son id selon ton besoin
 
             Stage stage = new Stage();

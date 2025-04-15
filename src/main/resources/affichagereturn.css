@@ -1,0 +1,159 @@
+/* Variables globales */
+.root {
+    -fx-primary-color: #3498db;
+    -fx-secondary-color: #2ecc71;
+    -fx-danger-color: #e74c3c;
+    -fx-light-gray: #ecf0f1;
+    -fx-dark-gray: #2c3e50;
+    -fx-background-color: linear-gradient(to bottom right, #f5f5f5, #e0e0e0);
+}
+
+/* Titre principal */
+.title-label {
+    -fx-font-size: 26px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -fx-dark-gray;
+    -fx-padding: 25px 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0.5, 0, 1);
+    -fx-letter-spacing: 0.5px;
+}
+
+/* Carte de retour */
+.return-box {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 8, 0, 0, 2);
+    -fx-padding: 20px;
+    -fx-min-width: 600px;
+    -fx-max-width: 800px;
+    -fx-transition: all 0.3s ease;
+}
+
+.return-box:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 12, 0, 0, 3);
+    -fx-translate-y: -2px;
+}
+
+/* Informations */
+.info-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e;
+    -fx-wrap-text: true;
+    -fx-line-spacing: 3px;
+}
+
+.status-label {
+    -fx-font-weight: bold;
+    -fx-padding: 3px 8px;
+    -fx-background-radius: 4px;
+}
+
+.status-completed {
+    -fx-text-fill: #27ae60;
+    -fx-background-color: #e8f6ef;
+}
+
+.status-pending {
+    -fx-text-fill: #f39c12;
+    -fx-background-color: #fef5e7;
+}
+
+/* Boutons */
+.button {
+    -fx-font-weight: 700;
+    -fx-padding: 8px 20px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
+    -fx-font-family: 'Arial';
+}
+
+.button:focused {
+    -fx-effect: dropshadow(gaussian, rgba(52,152,219,0.4), 8, 0.5, 0, 0);
+}
+
+.edit-button {
+    -fx-background-color: linear-gradient(to bottom, #3498db, #2980b9);
+    -fx-text-fill: white;
+    -fx-border-color: #2471a3;
+}
+
+.edit-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #2980b9, #2471a3);
+}
+
+.delete-button {
+    -fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b);
+    -fx-text-fill: white;
+    -fx-border-color: #b03a2e;
+}
+
+.delete-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #c0392b, #a93226);
+}
+
+/* Pagination */
+.pagination {
+    -fx-page-information-visible: false;
+    -fx-padding: 15px 0;
+}
+
+.pagination .pagination-control {
+    -fx-font-size: 14px;
+}
+
+.pagination .left-arrow, .pagination .right-arrow {
+    -fx-background-color: -fx-primary-color;
+    -fx-shape: none;
+    -fx-background-radius: 4px;
+}
+
+.pagination .page-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #7f8c8d;
+}
+
+.pagination .page-button:hover {
+    -fx-text-fill: -fx-dark-gray;
+}
+
+.pagination .page-button:selected {
+    -fx-text-fill: -fx-primary-color;
+    -fx-font-weight: bold;
+}
+
+/* ScrollPane amélioré */
+.transparent-scroll {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+.transparent-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.transparent-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.transparent-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #bdc3c7;
+    -fx-background-radius: 4px;
+}
+
+.transparent-scroll .scroll-bar:hover .thumb {
+    -fx-background-color: #95a5a6;
+}
+
+/* Effets de transition */
+.transition-all {
+    -fx-transition: all 0.3s ease;
+}
+
+/* Icônes (à utiliser avec FontAwesome) */
+.icon {
+    -fx-fill: currentColor;
+    -fx-icon-size: 16px;
+}

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UpdateInvestmentController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="updateinvesment.css" fx:controller="Controllers.UpdateInvestmentController">
 
     <ScrollPane fx:id="scrollPane" fitToWidth="true" style="-fx-background: transparent;" pannable="true" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
         <content>

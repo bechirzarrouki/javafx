@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:controller="Controllers.affichageReturns"  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1"
+<GridPane fx:controller="Controllers.AdminaffichageReturns" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1"
           stylesheets="affichagereturn.css" prefHeight="600" prefWidth="800" alignment="CENTER">
 
     <columnConstraints>
@@ -17,6 +17,7 @@
     </rowConstraints>
 
     <!-- Sidebar -->
+
 
     <!-- Contenu principal -->
     <VBox spacing="20" alignment="TOP_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">

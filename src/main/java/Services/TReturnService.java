@@ -41,7 +41,7 @@ public class TReturnService {
 
     // Modifier un retour
     public void update(TReturn tReturn) {
-        String query = "UPDATE return_entity SET description = ?, return_type = ?, rendement = ?, deadline = ?, status = ? WHERE id = ?";
+        String query = "UPDATE return_entity SET description = ?, type_return = ?, tax_rendement = ?, date_deadline = ?, status = ? WHERE id = ?";
         try {
             PreparedStatement stm = cnx.prepareStatement(query);
             stm.setString(1, tReturn.getDescription());

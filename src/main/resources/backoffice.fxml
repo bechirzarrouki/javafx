@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="Controllers.BackOfficeController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" stylesheets="affichage.css" fx:controller="Controllers.BackOfficeController">
 
     <!-- Sidebar -->
     <left>

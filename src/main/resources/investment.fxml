@@ -9,49 +9,50 @@
 
 <GridPane alignment="CENTER" prefHeight="500" prefWidth="500" stylesheets="style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InvestmentController">
 
-    <!-- Configuration des colonnes -->
     <columnConstraints>
         <ColumnConstraints maxWidth="200" minWidth="200" prefWidth="200" />
         <ColumnConstraints hgrow="ALWAYS" />
     </columnConstraints>
 
-    <!-- Configuration des lignes -->
     <rowConstraints>
         <RowConstraints vgrow="ALWAYS" />
     </rowConstraints>
 
-    <!-- Sidebar (colonne de gauche) -->
+    <!-- Sidebar -->
     <fx:include source="sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="0" />
 
-    <!-- Contenu principal (colonne de droite) -->
+    <!-- Contenu principal -->
     <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="0">
-        <!-- Navbar fixée en haut -->
-        <top>
-            <fx:include source="navbar.fxml" />
-        </top>
-
-        <!-- Contenu scrollable et centré -->
+            <top>
+                <fx:include source="navbar.fxml" />
+            </top>
         <center>
             <ScrollPane fitToWidth="true" style="-fx-background: transparent;" pannable="true">
                 <content>
-                    <VBox spacing="20" style="-fx-padding: 20;">
+                    <VBox spacing="20" style="-fx-padding: 20;" alignment="CENTER">
 
-                        <!-- Section de création d'investissement -->
-                        <VBox maxWidth="500.0" spacing="18" style="-fx-padding: 25; -fx-background-radius: 15;" styleClass="investment-box">
+                        <!-- Section d'investissement -->
+                        <VBox maxWidth="500.0" spacing="18" styleClass="investment-boxe">
+                            <padding>
+                                <Insets top="20" right="20" bottom="20" left="20"/>
+                            </padding>
+
                             <Label styleClass="title-label" text="Create Your Investment" />
                             <TextField fx:id="contentField" promptText="What do you have in your mind ?" styleClass="input-style" />
+
                             <VBox spacing="10">
-                                <Label styleClass="subtitle-label" text="Selected Type:" />
+
                                 <HBox alignment="CENTER" spacing="10.0">
-                                    <Button onAction="#openTypeModal" styleClass="choose-type-btn" text="Choose Investment Type" />
+                                    <Button onAction="#openTypeModal" styleClass="choose-type-btne" text="Choose Investment Type" />
                                     <Button onAction="#submitInvestment" styleClass="action-btn" text="Post Investment" />
                                 </HBox>
                             </VBox>
                         </VBox>
 
                         <!-- Modal de sélection de type -->
-                        <VBox fx:id="typeModal" spacing="10" styleClass="modal-overlay" visible="false">
-                            <VBox alignment="CENTER" spacing="15" styleClass="modal-container" style="-fx-pref-width: 600px;">
+                        <!-- Modal de sélection de type -->
+                        <VBox fx:id="typeModal" spacing="10" styleClass="modal-overlay" visible="false" maxWidth="500.0" style="-fx-padding: 25; -fx-background-radius: 15;">
+                            <VBox alignment="CENTER" spacing="15" styleClass="modal-container" style="-fx-pref-width: 500px;">
                                 <Label styleClass="modal-title" text="Select Investment Type" />
                                 <ListView fx:id="typeList" prefHeight="200" prefWidth="350" styleClass="styled-list-view">
                                     <items>
@@ -70,13 +71,14 @@
                             </VBox>
                         </VBox>
 
+
                         <!-- Conteneur des investissements -->
-                        <VBox fx:id="investmentContainer" spacing="20" />
+                        <VBox fx:id="investmentContainer" spacing="20" alignment="CENTER" />
 
                     </VBox>
                 </content>
             </ScrollPane>
         </center>
-
     </BorderPane>
 </GridPane>
+

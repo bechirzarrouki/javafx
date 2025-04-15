@@ -1,30 +1,54 @@
+/* Sidebar Principal */
 .sidebar {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #e0e0e0;
+    -fx-background-color: #ffffff; /* Fond blanc */
+    -fx-border-color: #e0e0e0; /* Bordure grise claire */
     -fx-border-width: 0 1px 0 0;
-    -fx-padding: 20;
-    -fx-spacing: 15;
-    -fx-alignment: top-center;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.05), 5, 0, 0, 1);
+    -fx-spacing: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0, 2, 0); /* Ombre légère */
 }
 
+/* Éléments de Menu */
 .menu-item {
     -fx-background-color: transparent;
-    -fx-text-fill: #53348D;
-    -fx-font-weight: bold;
-    -fx-font-size: 16px;
-    -fx-padding: 12 20;
-    -fx-alignment: center-left;
-    -fx-pref-width: 180px;
-    -fx-cursor: hand;
+    -fx-text-fill: #6d4cae; /* Texte gris moyen */
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 12px 20px;
     -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-content-display: left;
+    -fx-graphic-text-gap: 15px;
 }
 
 .menu-item:hover {
-    -fx-background-color: #f4f4f4;
+    -fx-background-color: #f5f5f5; /* Gris très clair au survol */
+    -fx-text-fill: #2196F3; /* Bleu au survol */
 }
 
-.menu-item:focused {
-    -fx-background-color: #e8e4f2;
-    -fx-text-fill: #3e2773;
+.menu-item.active {
+    -fx-background-color: #2196F3; /* Bleu vif pour l'élément actif */
+    -fx-text-fill: white !important;
+}
+
+/* Icônes */
+.menu-icon {
+    -fx-font-size: 18px;
+    -fx-fill: #999999; /* Gris moyen pour les icônes */
+}
+
+/* Bouton Logout */
+.logout-btn {
+    -fx-text-fill: #e53935 !important; /* Rouge vif */
+}
+
+.logout-btn:hover {
+    -fx-background-color: #ffebee !important; /* Rouge très clair */
+    -fx-text-fill: #d32f2f !important; /* Rouge plus foncé */
+}
+
+/* Zone de Contenu */
+.content-area {
+    -fx-background-color: #fafafa; /* Fond légèrement grisé */
+    -fx-padding: 30px;
 }

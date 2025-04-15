@@ -21,15 +21,10 @@
     </rowConstraints>
 
     <!-- Sidebar -->
-    <fx:include source="sidebar.fxml" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
 
     <!-- Contenu principal avec navbar + formulaire -->
     <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="0">
-
-        <!-- Navbar en haut -->
-        <top>
-            <fx:include source="navbar.fxml" />
-        </top>
 
         <!-- Formulaire centré -->
         <center>

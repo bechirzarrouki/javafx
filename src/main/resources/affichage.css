@@ -1,0 +1,114 @@
+/* affichageinvestment.css */
+
+/* Style de base pour le ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Conteneur principal */
+#investmentContainer {
+    -fx-padding: 20px;
+    -fx-spacing: 20px;
+    -fx-alignment: top-center;
+}
+
+/* Boîte d'investissement */
+.investment-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 0, 4, 8, 0);
+    -fx-spacing: 12px;
+    -fx-min-width: 600px;
+    -fx-max-width: 800px;
+}
+
+.investment-box:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 0, 6, 12, 0);
+    -fx-border-color: #bdbdbd;
+    -fx-cursor: hand;
+}
+
+/* Text Styles */
+.investment-content {
+    -fx-padding: 10px;
+    -fx-background-color: #f9f9f9;
+    -fx-background-radius: 5px;
+    -fx-border-color: #53348D;
+    -fx-border-width: 0 0 0 4px;
+    -fx-border-radius: 5px 0 0 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.investment-types {
+    -fx-padding: 10px;
+    -fx-background-color: #f9f9f9;
+    -fx-background-radius: 5px;
+    -fx-border-color: #53348D;
+    -fx-border-width: 0 0 0 4px;
+    -fx-border-radius: 5px 0 0 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.investment-date {
+    -fx-padding: 10px;
+    -fx-background-color: #f9f9f9;
+    -fx-background-radius: 5px;
+    -fx-border-color: #53348D;
+    -fx-border-width: 0 0 0 4px;
+    -fx-border-radius: 5px 0 0 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+/* Conteneur de boutons */
+.button-container {
+    -fx-spacing: 15px;
+    -fx-alignment: center-left;
+    -fx-padding: 10px 0 0 0;
+}
+
+/* Boutons */
+.like-button {
+    -fx-background-color: #00b894;
+    -fx-text-fill: white;
+    -fx-padding: 6px 18px;
+    -fx-background-radius: 20px;
+    -fx-font-size: 13px;
+}
+
+.like-button:hover {
+    -fx-background-color: #00a383;
+}
+
+.action-button {
+    -fx-background-color: #6d4cae;
+    -fx-text-fill: white;
+    -fx-padding: 6px 18px;
+    -fx-background-radius: 20px;
+    -fx-font-size: 13px;
+}
+
+.action-button:hover {
+    -fx-background-color: #6d4cae;
+}
+
+.likes-label {
+    -fx-text-fill: #636e72;
+    -fx-font-size: 13px;
+    -fx-padding: 0 12px;
+    -fx-font-weight: bold;
+}
+
+/* Effet de transition */
+.investment-box, .button, .label {
+    -fx-transition: all 0.3s ease;
+}

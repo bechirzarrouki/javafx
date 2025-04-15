@@ -3,29 +3,54 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" stylesheets="@sidebar.css" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controllers.SidebarController"
+            stylesheets="sidebar.css">
 
     <left>
-        <VBox fx:id="sidebar" styleClass="sidebar" prefWidth="200">
+        <VBox fx:id="sidebar" styleClass="sidebar" prefWidth="250">
             <padding>
-                <Insets top="60.0" />
+                <Insets top="40" right="20" bottom="20" left="20"/>
             </padding>
 
             <children>
-                <!-- Boutons avec nom visible -->
-                <Button styleClass="menu-item" text="Menu" />
-                <Button fx:id="createInvestmentBtn" styleClass="menu-item" text="Create Investment" />
-                <Button fx:id="investmentsBtn" styleClass="menu-item" text="Investments" />
-                <Button fx:id="projectsBtn" styleClass="menu-item" text="Projects" />
-                <Button fx:id="coursesBtn" styleClass="menu-item" text="Courses" />
-                <Button styleClass="menu-item" text="Log out" />
+                <Button styleClass="menu-item active">
+                    <text>Dashboard</text>
+                    <graphic>
+                        <Text text="🏠" styleClass="menu-icon"/>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="createInvestmentBtn" styleClass="menu-item">
+                    <text>New Investment</text>
+                    <graphic>
+                        <Text text="💼" styleClass="menu-icon"/>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="investmentsBtn" styleClass="menu-item">
+                    <text>My Investments</text>
+                    <graphic>
+                        <Text text="📈" styleClass="menu-icon"/>
+                    </graphic>
+                </Button>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <Button styleClass="menu-item logout-btn">
+                    <text>Log Out</text>
+                    <graphic>
+                        <Text text="🚪" styleClass="menu-icon"/>
+                    </graphic>
+                </Button>
             </children>
         </VBox>
     </left>
 
     <center>
-        <!-- Zone principale -->
-        <StackPane fx:id="contentArea" />
+        <AnchorPane fx:id="contentArea" styleClass="content-area"/>
     </center>
 </BorderPane>

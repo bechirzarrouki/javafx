@@ -1,0 +1,71 @@
+/* Navigation Bar */
+.nav-bar {
+    -fx-background-color: #3C2466;
+    -fx-padding: 0 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 0, 4, 0, 0);
+}
+
+/* Logo */
+.nav-logo {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-fill: white;
+    -fx-font-family: 'Pacifico', cursive;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0.5, 0, 1);
+}
+
+/* Search Field */
+.search-field {
+    -fx-pref-width: 400px;
+    -fx-pref-height: 40px;
+    -fx-background-color: white;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #53348D;
+    -fx-border-width: 2px;
+    -fx-padding: 0 20px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #a0a0a0;
+}
+
+.search-field:focused {
+    -fx-border-color: #6d4cae;
+    -fx-effect: innershadow(gaussian, rgba(83,52,141,0.2), 10, 0, 0, 0);
+}
+
+/* Chat Icon */
+.chat-icon-bg {
+    -fx-fill: white;
+    -fx-stroke: #53348D;
+    -fx-stroke-width: 2px;
+}
+
+.chat-icon {
+    -fx-font-size: 20px;
+    -fx-fill: #53348D;
+}
+
+.icon-button:hover .chat-icon-bg {
+    -fx-fill: #f0e9ff;
+    -fx-stroke: #6d4cae;
+}
+
+/* Profile Image */
+.profile-image {
+    -fx-fit-width: 45px;
+    -fx-fit-height: 45px;
+    -fx-border-color: #53348D;
+    -fx-border-width: 2px;
+    -fx-border-radius: 50%;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 3, 0, 0, 1);
+}
+
+.profile-image:hover {
+    -fx-border-color: #6d4cae;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+/* Right Container */
+.nav-right-container {
+    -fx-padding: 0 20px 0 0;
+}

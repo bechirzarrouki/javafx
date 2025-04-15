@@ -9,30 +9,30 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml/1" >
-    <HBox spacing="20" alignment="CENTER" style="-fx-background-color: #3C2466; -fx-border-radius: 5; -fx-padding: 10;" prefHeight="60" >
+<StackPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="navbar.css">
+    <HBox styleClass="nav-bar" prefHeight="70" spacing="20" alignment="CENTER">
         <!-- Logo Section -->
-        <HBox alignment="CENTER_LEFT">
-            <Text text="InnovMatch" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-fill: white; -fx-font-family: 'Pacifico';"/>
+        <HBox alignment="CENTER_LEFT" styleClass="nav-logo-container">
+            <Text text="InnovMatch" styleClass="nav-logo"/>
         </HBox>
 
         <!-- Search Section -->
-        <HBox alignment="CENTER">
-            <TextField promptText="Rechercher un utilisateur..." style="-fx-background-color: white; -fx-border-radius: 20px; -fx-border-color: #53348D; -fx-padding: 10px;" prefWidth="300"/>
+        <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+            <TextField promptText="Rechercher un utilisateur..." styleClass="search-field"/>
         </HBox>
 
         <!-- Right side Profile & Chat Section -->
-        <HBox alignment="CENTER_RIGHT" spacing="15">
+        <HBox alignment="CENTER_RIGHT" spacing="15" styleClass="nav-right-container">
             <!-- Chat Button -->
-            <Button style="-fx-background-color: transparent; -fx-border: none;">
+            <Button styleClass="icon-button">
                 <StackPane>
-                    <Circle fx:id="chatCircle" fill="white" radius="20"/>
-                    <Text text="💬" style="-fx-font-size: 20px; -fx-fill: #53348D;"/>
+                    <Circle fx:id="chatCircle" styleClass="chat-icon-bg"/>
+                    <Text text="💬" styleClass="chat-icon"/>
                 </StackPane>
             </Button>
 
             <!-- Profile Image -->
-            <ImageView fx:id="profileImage" fitHeight="40" fitWidth="40" preserveRatio="true" style="-fx-border-radius: 50%; -fx-border-color: #53348D;"/>
+            <ImageView fx:id="profileImage" styleClass="profile-image"/>
         </HBox>
     </HBox>
 </StackPane>

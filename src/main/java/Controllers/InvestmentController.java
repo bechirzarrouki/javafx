@@ -1,7 +1,6 @@
 package Controllers;
 
 import Models.User;
-import Services.PostServices;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,11 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.StackPane;  // Importer StackPane pour le centrage
 import Models.Investment;
 import Services.InvestmentServices;
 import javafx.stage.Stage;
-import javafx.geometry.Pos;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -200,44 +197,65 @@ public class InvestmentController {
     }
 
     private VBox createInvestmentBox(Investment investment) {
+        VBox investmentBox = new VBox(10);
+        investmentBox.getStyleClass().add("investment-box");
 
-        StackPane stackPane = new StackPane();
-        VBox investmentBox = new VBox(5);
-        investmentBox.setStyle("-fx-border-color: #ddd; -fx-border-radius: 8; -fx-padding: 15; -fx-background-color: #ffffff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2); -fx-pref-width: 500; -fx-alignment: center;");
-        investmentBox.setMaxWidth(500);
-        investmentBox.setAlignment(Pos.CENTER);
-
-        // Labels de l'investissement
+        // Content
         Label contentLabel = new Label(investment.getContent());
-        contentLabel.setStyle("-fx-font-size: 10; -fx-font-weight: lighter; -fx-text-fill: black;");
+        contentLabel.getStyleClass().add("investment-content");
         contentLabel.setWrapText(true);
 
+        // Details
         Label typesLabel = new Label("Types: " + String.join(", ", investment.getInvestmentTypes()));
-        typesLabel.setStyle("-fx-font-size: 10; -fx-font-weight: lighter; -fx-text-fill: black;");
+        Label dateLabel = new Label("Created: " + investment.getCreatedAt().toString());
+        typesLabel.getStyleClass().add("investment-detail");
+        dateLabel.getStyleClass().add("investment-detail");
 
-        Label dateLabel = new Label("Created At: " + investment.getCreatedAt().toString());
-        dateLabel.setStyle("-fx-font-size: 10; -fx-font-weight: lighter; -fx-text-fill: black;");
-
-        // Boutons d'action
-        HBox buttonBox = new HBox(10);
+        // Buttons
         Button editButton = new Button("Edit");
         Button deleteButton = new Button("Delete");
         Button viewReturnsButton = new Button("Add Returns");
 
+        editButton.getStyleClass().addAll("button", "edit-button");
+        deleteButton.getStyleClass().addAll("button", "delete-button");
+        viewReturnsButton.getStyleClass().addAll("button", "returns-button");
+
+        HBox buttonBox = new HBox(10);
+        buttonBox.getStyleClass().add("button-container");
+        buttonBox.getChildren().addAll(editButton, deleteButton, viewReturnsButton);
+
+        // Event Handlers
         editButton.setOnAction(event -> updateInvestment(investment));
         deleteButton.setOnAction(event -> deleteInv(investment));
         viewReturnsButton.setOnAction(event -> openReturnsPage(investment));
+        investmentBox.setOnMouseClicked(event -> openInvestmentDetailsPage(investment));
 
-        buttonBox.getChildren().addAll(editButton, deleteButton, viewReturnsButton);
         investmentBox.getChildren().addAll(contentLabel, typesLabel, dateLabel, buttonBox);
-
-
-        stackPane.getChildren().add(investmentBox);
-        StackPane.setAlignment(investmentBox, Pos.CENTER);
-
         return investmentBox;
     }
 
+    private void openInvestmentDetailsPage(Investment investment) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/return.fxml"));
+            Parent root = loader.load();
+
+            affichageReturns controller = loader.getController();
+            controller.setInvestment(investment); // passe directement l'objet ou son id selon ton besoin
+
+            Stage stage = new Stage();
+            stage.setTitle("Investment Details #" + investment.getId());
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not load investment details page.");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
     private void openReturnsPage(Investment investment) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajrutern.fxml"));
@@ -268,12 +286,12 @@ public class InvestmentController {
 
     private void updateInvestment(Investment investment) {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/updatinvestment.fxml"));
             Parent root = loader.load();
 
             UpdateInvestmentController controller = loader.getController();
             controller.setInvestment(investment);
+
             Stage stage = new Stage();
             stage.setTitle("Update Investment #" + investment.getId());
             stage.setScene(new Scene(root));

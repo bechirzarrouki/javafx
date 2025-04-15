@@ -1,44 +1,54 @@
+/* Styles de base */
 .root {
     -fx-base: #f5f6fa;
     -fx-font-family: 'Segoe UI';
+    -fx-font-size: 14px;
 }
 
+/* Barre de navigation */
 .navbar {
     -fx-background-color: #2c3e50;
-    -fx-pref-height: 60;
+    -fx-pref-height: 60px;
     -fx-alignment: center-left;
-    -fx-padding: 0 20 0 20;
+    -fx-padding: 0 20px;
 }
 
+/* Sidebar */
 .sidebar {
     -fx-background-color: #ecf0f1;
-    -fx-pref-width: 200;
-    -fx-padding: 20;
+    -fx-pref-width: 200px;
+    -fx-padding: 20px;
 }
 
+/* Conteneur principal */
 .vbox-content {
-    -fx-padding: 20;
-    -fx-spacing: 20;
-    -fx-alignment: center; /* Centrer les éléments dans la VBox */
+    -fx-padding: 20px;
+    -fx-spacing: 20px;
+    -fx-alignment: center;
 }
 
-.investment-box {
-    -fx-background-color: white;
-    -fx-border-color: #e0e0e0;
-    -fx-border-radius: 15;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);
-    -fx-padding: 25px;
-    -fx-alignment: center; /* Centrer le contenu de la box */
-    -fx-max-width: 700px; /* Limiter la largeur */
-    -fx-min-width: 500px; /* Largeur minimale */
+/* Boîte d'investissement */
+.investment-boxe {
+    -fx-background-color: linear-gradient(from 0% 100% to 100% 0%, #6a11cb 0%, #2575fc 100%);
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+    -fx-max-width: 600px;
+    -fx-padding: 20px;
 }
 
+/* Styles de texte */
 .title-label {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-text-fill: #2c3e50;
 }
 
+.subtitle-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #e0e0e0;
+}
+
+/* Champs de saisie */
 .input-style {
     -fx-pref-height: 50px;
     -fx-font-size: 16px;
@@ -47,7 +57,6 @@
     -fx-border-color: #bdc3c7;
     -fx-border-width: 1.5px;
     -fx-padding: 0 15px;
-    -fx-max-width: infinity;
     -fx-background-color: #ffffff;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.03), 0, 0, 0, 1);
 }
@@ -58,28 +67,36 @@
     -fx-effect: dropshadow(gaussian, rgba(52,152,219,0.15), 8, 0, 0, 2);
 }
 
-.choose-type-btn, .action-btn {
+/* Boutons */
+.choose-type-btne, .action-btn {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-background-radius: 8px;
     -fx-padding: 15px 30px;
     -fx-min-width: 200px;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 1);
+    -fx-transition: background-color 0.3s ease;
 }
 
-.choose-type-btn {
+.choose-type-btne {
     -fx-background-color: #3498db;
-    -fx-text-fill: white;
 }
 
 .action-btn {
-    -fx-background-color: #2ecc71;
-    -fx-text-fill: white;
+    -fx-background-color: #3498db;
 }
 
-.action-btn:hover {
-    -fx-background-color: #27ae60;
+.choose-type-btne:hover, .action-btn:hover {
+    -fx-background-color: derive(-fx-background-color, -15%);
 }
 
+.choose-type-btne:pressed, .action-btn:pressed {
+    -fx-background-color: derive(-fx-background-color, -25%);
+}
+
+/* Modals */
 .modal-overlay {
     -fx-background-color: rgba(0,0,0,0.5);
     -fx-alignment: center;
@@ -91,9 +108,7 @@
     -fx-background-radius: 15px;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 5);
     -fx-pref-width: 700px;
-    -fx-pref-height: 400px;
     -fx-spacing: 20px;
-    -fx-alignment: center; /* Centrer le contenu dans le modal */
 }
 
 .modal-title {
@@ -103,19 +118,18 @@
     -fx-padding: 0 0 15px 0;
 }
 
+/* ListView personnalisé */
 .styled-list-view {
     -fx-background-color: #f8f9fa;
     -fx-border-color: #e9ecef;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
     -fx-pref-width: 600px;
-    -fx-pref-height: 250px;
 }
 
 .styled-list-view .list-cell {
     -fx-padding: 15px 20px;
     -fx-background-color: transparent;
-    -fx-font-size: 16px;
     -fx-border-color: #e9ecef;
     -fx-border-width: 0 0 1px 0;
 }
@@ -129,7 +143,7 @@
     -fx-text-fill: white;
 }
 
-/* Style spécifique pour investmentListContainer */
+/* Conteneur de liste */
 .investment-list-container {
     -fx-spacing: 15px;
     -fx-alignment: center;
@@ -138,13 +152,12 @@
     -fx-border-color: #e0e0e0;
     -fx-border-radius: 15px;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);
-    -fx-max-width: 700px; /* Limiter la largeur */
-    -fx-min-width: 500px; /* Largeur minimale */
+    -fx-max-width: 700px;
 }
 
+/* DatePicker personnalisé */
 .date-picker {
     -fx-background-radius: 8px;
-    -fx-max-width: infinity;
 }
 
 .date-picker .text-field {
@@ -164,17 +177,18 @@
     -fx-background-color: #2980b9;
 }
 
+/* Boutons de modal */
 .modal-confirm-btn, .modal-cancel-btn {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-background-radius: 8px;
     -fx-padding: 12px 25px;
     -fx-min-width: 120px;
+    -fx-text-fill: white;
 }
 
 .modal-confirm-btn {
     -fx-background-color: #3498db;
-    -fx-text-fill: white;
 }
 
 .modal-confirm-btn:hover {
@@ -183,9 +197,86 @@
 
 .modal-cancel-btn {
     -fx-background-color: #e74c3c;
-    -fx-text-fill: white;
 }
 
 .modal-cancel-btn:hover {
     -fx-background-color: #c0392b;
+}
+/* Investment Box */
+.investment-box {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 20;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 8, 0, 0, 2);
+    -fx-max-width: 600;
+    -fx-alignment: center-left;
+}
+
+.investment-box:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.12), 10, 0, 0, 3);
+}
+
+/* Content Styling */
+.investment-content {
+    -fx-padding: 10px;
+    -fx-background-color: #f9f9f9;
+    -fx-background-radius: 5px;
+    -fx-border-color: #53348D;
+    -fx-border-width: 0 0 0 4px;
+    -fx-border-radius: 5px 0 0 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+.investment-detail {
+    -fx-padding: 10px;
+    -fx-background-color: #f9f9f9;
+    -fx-background-radius: 5px;
+    -fx-border-color: #53348D;
+    -fx-border-width: 0 0 0 4px;
+    -fx-border-radius: 5px 0 0 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+/* Buttons Container */
+.button-container {
+    -fx-alignment: center-right;
+    -fx-padding: 10 0 0 0;
+}
+
+/* Base Button Style */
+.button {
+    -fx-font-size: 12px;
+    -fx-font-weight: 600;
+    -fx-padding: 8 15;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+    -fx-text-fill: white;
+}
+
+.edit-button {
+    -fx-background-color: #00b894;
+}
+
+.edit-button:hover {
+    -fx-background-color: #00a383;
+}
+
+.delete-button {
+    -fx-background-color: #d63031;
+}
+
+.delete-button:hover {
+    -fx-background-color: #c0292b;
+}
+
+.returns-button {
+    -fx-background-color: #0984e3;
+}
+
+.returns-button:hover {
+    -fx-background-color: #0873c4;
 }
