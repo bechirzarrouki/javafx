@@ -4,6 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Circle?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="profile-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserProfileController">
     <ScrollPane fitToWidth="true" AnchorPane.topAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" styleClass="profile-scrollpane">
@@ -18,8 +19,10 @@
 
             <!-- Profile Section -->
             <VBox alignment="CENTER" spacing="15" styleClass="profile-section">
-                <StackPane styleClass="profile-image-container">
-                    <ImageView fx:id="profileImageView" fitHeight="100.0" fitWidth="100.0" preserveRatio="true" styleClass="profile-image">
+                <!-- Improved profile image container with fixed size and better styling -->
+                <StackPane styleClass="profile-image-container" maxWidth="120" maxHeight="120" minWidth="120" minHeight="120">
+                    <Circle fx:id="profileImageCircle" radius="60" fill="white" styleClass="profile-image-circle"/>
+                    <ImageView fx:id="profileImageView" styleClass="profile-image">
                         <Image url="@images/default-avatar.png"/>
                     </ImageView>
                 </StackPane>

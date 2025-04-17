@@ -361,24 +361,48 @@
 .profile-image-container {
     -fx-background-color: white;
     background-color: white;
-    -fx-background-radius: 50;
-    border-radius: 50px;
-    -fx-border-radius: 50;
-    -fx-border-color: #6c5ce7;
-    border-color: #6c5ce7;
-    -fx-border-width: 2;
-    border-width: 2px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+    -fx-background-radius: 60;
+    border-radius: 60px;
+    -fx-border-radius: 60;
+    -fx-border-color: #6B46C1;
+    border-color: #6B46C1;
+    -fx-border-width: 3;
+    border-width: 3px;
+    -fx-effect: dropshadow(gaussian, rgba(107, 70, 193, 0.3), 10, 0, 0, 0);
+    -fx-padding: 5;
+    padding: 5px;
+    -fx-alignment: center;
+    align-items: center;
+    -fx-min-width: 120px;
+    min-width: 120px;
+    -fx-min-height: 120px;
+    min-height: 120px;
+    -fx-max-width: 120px;
+    max-width: 120px;
+    -fx-max-height: 120px;
+    max-height: 120px;
+}
+
+.profile-image-circle {
+    -fx-fill: white;
+    fill: white;
+    -fx-stroke: #6B46C1;
+    stroke: #6B46C1;
+    -fx-stroke-width: 2;
+    stroke-width: 2px;
+    -fx-effect: innershadow(gaussian, rgba(107, 70, 193, 0.2), 5, 0, 0, 0);
 }
 
 .profile-image {
-    -fx-background-radius: 50;
-    border-radius: 50px;
+    -fx-background-radius: 60;
+    border-radius: 60px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 3, 0, 0, 1);
+    -fx-smooth: true;
 }
 
 .change-image-button {
-    -fx-background-color: #6c5ce7;
-    background-color: #6c5ce7;
+    -fx-background-color: #6B46C1;
+    background-color: #6B46C1;
     -fx-text-fill: white;
     -fx-background-radius: 20;
     border-radius: 20px;
@@ -386,11 +410,19 @@
     padding: 8px 20px;
     -fx-cursor: hand;
     cursor: pointer;
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(107, 70, 193, 0.3), 5, 0, 0, 1);
+    -fx-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .change-image-button:hover {
-    -fx-background-color: #5849c4;
-    background-color: #5849c4;
+    -fx-background-color: #553C9A;
+    background-color: #553C9A;
+    -fx-effect: dropshadow(gaussian, rgba(107, 70, 193, 0.5), 8, 0, 0, 2);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 .profile-username {

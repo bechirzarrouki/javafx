@@ -26,6 +26,12 @@
             <Button text="Logout" onAction="#handleLogout" styleClass="logout-button"/>
         </HBox>
 
+        <!-- Search and Actions -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <TextField fx:id="searchField" promptText="Search..." HBox.hgrow="ALWAYS"/>
+            <Button text="Generate PDF" onAction="#handleGeneratePDF" styleClass="primary-button"/>
+        </HBox>
+
         <!-- Main Content -->
         <VBox spacing="10" VBox.vgrow="ALWAYS">
             <padding>

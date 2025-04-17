@@ -18,7 +18,15 @@ import Utils.AnimationUtils;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import java.io.File;
 import java.io.IOException;
+import javafx.stage.FileChooser;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,6 +51,9 @@ public class AdminDashboardController {
 
     @FXML
     private TableColumn<UserTableData, Void> actionsColumn;
+
+    @FXML
+    private TextField searchField;
 
     private ObservableList<UserTableData> users = FXCollections.observableArrayList();
 
@@ -85,6 +96,13 @@ public class AdminDashboardController {
                 });
             }
         });
+
+        // --- Live search logic ---
+        if (searchField != null) {
+            searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+                filterTable(newValue);
+            });
+        }
 
         // Charge les utilisateurs
         loadUsers();
@@ -260,6 +278,116 @@ public class AdminDashboardController {
     }
 
     @FXML
+    private void handleGeneratePDF() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save PDF");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+        fileChooser.setInitialFileName("users.pdf");
+        File file = fileChooser.showSaveDialog(usersTable.getScene().getWindow());
+        if (file == null) return;
+
+        float[] colWidths = {110, 180, 90, 110};
+        String[] headers = {"Username", "Email", "Phone", "Role"};
+        int cols = headers.length;
+
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage(PDRectangle.A4);
+            document.addPage(page);
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+            float margin = 50;
+            float yStart = PDRectangle.A4.getHeight() - margin;
+            float tableTopY = yStart - 30;
+            float rowHeight = 24;
+            float tableWidth = 0;
+            for (float w : colWidths) tableWidth += w;
+            float tableLeftX = margin;
+            float y = tableTopY;
+
+            // Title
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 18);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(tableLeftX, y + 40);
+            contentStream.showText("Users Table");
+            contentStream.endText();
+
+            // Header background
+            contentStream.setNonStrokingColor(new java.awt.Color(230, 230, 230));
+            contentStream.addRect(tableLeftX, y, tableWidth, rowHeight);
+            contentStream.fill();
+            contentStream.setNonStrokingColor(java.awt.Color.BLACK);
+
+            // Draw table grid
+            int numRows = usersTable.getItems().size() + 1;
+            for (int i = 0; i <= numRows; i++) {
+                float lineY = y - i * rowHeight;
+                contentStream.moveTo(tableLeftX, lineY);
+                contentStream.lineTo(tableLeftX + tableWidth, lineY);
+            }
+            float nextX = tableLeftX;
+            for (int i = 0; i <= cols; i++) {
+                contentStream.moveTo(nextX, y);
+                contentStream.lineTo(nextX, y - numRows * rowHeight);
+                if (i < cols) nextX += colWidths[i];
+            }
+            contentStream.setLineWidth(0.8f);
+            contentStream.stroke();
+
+            // Write headers (bold, left-aligned, padded)
+            float cellX = tableLeftX;
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            for (int i = 0; i < cols; i++) {
+                float textX = cellX + 8;
+                float textY = y + rowHeight / 2 - 5;
+                contentStream.beginText();
+                contentStream.newLineAtOffset(textX, textY);
+                contentStream.showText(headers[i]);
+                contentStream.endText();
+                cellX += colWidths[i];
+            }
+
+            // Write data rows (left-aligned, padded)
+            contentStream.setFont(PDType1Font.HELVETICA, 11);
+            int rowNum = 1;
+            for (UserTableData user : usersTable.getItems()) {
+                float rowY = y - rowNum * rowHeight;
+                cellX = tableLeftX;
+                String[] vals = {
+                    user.getUsername(),
+                    user.getEmail(),
+                    user.getNumber() != null ? user.getNumber().toString() : "",
+                    user.getRole()
+                };
+                for (int i = 0; i < cols; i++) {
+                    float textX = cellX + 8;
+                    float textY = rowY + rowHeight / 2 - 5;
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(textX, textY);
+                    contentStream.showText(vals[i]);
+                    contentStream.endText();
+                    cellX += colWidths[i];
+                }
+                rowNum++;
+                // Handle page break if needed
+                if (rowY - rowHeight < margin) {
+                    contentStream.close();
+                    page = new PDPage(PDRectangle.A4);
+                    document.addPage(page);
+                    contentStream = new PDPageContentStream(document, page);
+                    y = tableTopY;
+                    rowNum = 1;
+                }
+            }
+
+            contentStream.close();
+            document.save(file);
+            showAlert(Alert.AlertType.INFORMATION, "PDF Generated", "PDF exported successfully!");
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "PDF Error", "Failed to generate PDF: " + e.getMessage());
+        }
+    }
+
+    @FXML
     private void handleLogout() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
@@ -279,6 +407,23 @@ public class AdminDashboardController {
 
     public void refreshTable() {
         loadUsers();
+    }
+
+    private void filterTable(String filter) {
+        if (filter == null || filter.isEmpty()) {
+            usersTable.setItems(users);
+            return;
+        }
+        ObservableList<UserTableData> filtered = FXCollections.observableArrayList();
+        for (UserTableData user : users) {
+            if (user.getUsername().toLowerCase().contains(filter.toLowerCase()) ||
+                user.getEmail().toLowerCase().contains(filter.toLowerCase()) ||
+                (user.getNumber() != null && user.getNumber().toString().contains(filter)) ||
+                user.getRole().toLowerCase().contains(filter.toLowerCase())) {
+                filtered.add(user);
+            }
+        }
+        usersTable.setItems(filtered);
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {

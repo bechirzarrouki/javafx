@@ -8,10 +8,12 @@ public abstract class User {
     protected Integer number;
     protected String profileImage;
     protected Boolean banned = false;
+    protected String resetToken;
+    protected java.time.LocalDateTime resetTokenExpiry;
 
     public User() {}
 
-    public User(Integer id, String username, String email, String password, Integer number, String profileImage, Boolean banned) {
+    public User(Integer id, String username, String email, String password, Integer number, String profileImage, Boolean banned, String resetToken, java.time.LocalDateTime resetTokenExpiry) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -19,6 +21,8 @@ public abstract class User {
         this.number = number;
         this.profileImage = profileImage;
         this.banned = banned;
+        this.resetToken = resetToken;
+        this.resetTokenExpiry = resetTokenExpiry;
     }
 
     public abstract String getRole();
@@ -45,6 +49,12 @@ public abstract class User {
     public Boolean isBanned() { return banned; }
     public void setBanned(Boolean banned) { this.banned = banned; }
 
+    public String getResetToken() { return resetToken; }
+    public void setResetToken(String resetToken) { this.resetToken = resetToken; }
+
+    public java.time.LocalDateTime getResetTokenExpiry() { return resetTokenExpiry; }
+    public void setResetTokenExpiry(java.time.LocalDateTime resetTokenExpiry) { this.resetTokenExpiry = resetTokenExpiry; }
+
     @Override
     public String toString() {
         return "User{" +
@@ -56,6 +66,8 @@ public abstract class User {
                 ", profileImage='" + profileImage + '\'' +
                 ", role='" + getRole() + '\'' +
                 ", banned=" + banned +
+                ", resetToken='" + resetToken + '\'' +
+                ", resetTokenExpiry=" + resetTokenExpiry +
                 '}';
     }
 }

@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -37,6 +38,9 @@ public class UserProfileController {
     private ImageView profileImageView;
     
     @FXML
+    private Circle profileImageCircle;
+    
+    @FXML
     private Button changeImageButton;
     
     @FXML
@@ -58,6 +62,20 @@ public class UserProfileController {
     public void initialize() {
         // Add click handler for image change
         changeImageButton.setOnAction(e -> handleChangeImage());
+        
+        // Configure circular clip for profile image
+        setupCircularImageView();
+    }
+    
+    private void setupCircularImageView() {
+        // Make sure the image fits perfectly in the circle
+        profileImageView.setFitWidth(120);
+        profileImageView.setFitHeight(120);
+        profileImageView.setPreserveRatio(false);
+        
+        // Create a circular clip
+        Circle clip = new Circle(60, 60, 60);
+        profileImageView.setClip(clip);
     }
 
     private void handleChangeImage() {
@@ -83,6 +101,9 @@ public class UserProfileController {
                 // Update image in UI
                 Image image = new Image(destFile.toURI().toString());
                 profileImageView.setImage(image);
+                
+                // Ensure the circular clip is applied
+                setupCircularImageView();
                 
                 // Update database
                 String imagePath = "uploads/profiles/" + fileName;
@@ -151,6 +172,8 @@ public class UserProfileController {
                         if (imageFile.exists()) {
                             Image image = new Image(imageFile.toURI().toString());
                             profileImageView.setImage(image);
+                            // Ensure the circular clip is applied after loading the image
+                            setupCircularImageView();
                             System.out.println("Successfully loaded profile image");
                         } else {
                             // Try loading from resources as fallback
@@ -159,6 +182,8 @@ public class UserProfileController {
                             if (imageStream != null) {
                                 Image image = new Image(imageStream);
                                 profileImageView.setImage(image);
+                                // Ensure the circular clip is applied after loading the image
+                                setupCircularImageView();
                                 System.out.println("Successfully loaded profile image from resources");
                             } else {
                                 throw new Exception("Image file not found in any location");
@@ -169,10 +194,14 @@ public class UserProfileController {
                         e.printStackTrace();
                         // Load default avatar on error
                         profileImageView.setImage(new Image(getClass().getResourceAsStream("/images/default-avatar.png")));
+                        // Ensure the circular clip is applied after loading the default image
+                        setupCircularImageView();
                     }
                 } else {
                     System.out.println("No profile image path in DB, using default avatar");
                     profileImageView.setImage(new Image(getClass().getResourceAsStream("/images/default-avatar.png")));
+                    // Ensure the circular clip is applied after loading the default image
+                    setupCircularImageView();
                 }
             }
         } catch (SQLException e) {

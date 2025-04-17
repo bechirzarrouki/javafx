@@ -24,7 +24,7 @@ public class UserServices implements InterfaceServices<User> {
 
     @Override
     public void add(User user) {
-        String query = "INSERT INTO user (username, email, password, number, profile_image, role, banned) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user (username, email, password, number, profile_image, role, banned, reset_token, reset_token_expiry) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement stm = cnx.prepareStatement(query);
@@ -35,6 +35,12 @@ public class UserServices implements InterfaceServices<User> {
             stm.setString(5, user.getProfileImage());
             stm.setString(6, user.getRole());
             stm.setBoolean(7, user.isBanned());
+            stm.setString(8, user.getResetToken());
+            if (user.getResetTokenExpiry() != null) {
+                stm.setTimestamp(9, java.sql.Timestamp.valueOf(user.getResetTokenExpiry()));
+            } else {
+                stm.setNull(9, java.sql.Types.TIMESTAMP);
+            }
 
             stm.executeUpdate();
         } catch (SQLException e) {
@@ -45,7 +51,7 @@ public class UserServices implements InterfaceServices<User> {
 
     @Override
     public void modify(User user) {
-        String query = "UPDATE user SET username=?, email=?, password=?, number=?, profileImage=?, role=?, banned=? WHERE id=?";
+        String query = "UPDATE user SET username=?, email=?, password=?, number=?, profileImage=?, role=?, banned=?, reset_token=?, reset_token_expiry=? WHERE id=?";
 
         try {
             PreparedStatement stm = cnx.prepareStatement(query);
@@ -56,7 +62,13 @@ public class UserServices implements InterfaceServices<User> {
             stm.setString(5, user.getProfileImage());
             stm.setString(6, user.getRole());
             stm.setBoolean(7, user.isBanned());
-            stm.setInt(8, user.getId());
+            stm.setString(8, user.getResetToken());
+            if (user.getResetTokenExpiry() != null) {
+                stm.setTimestamp(9, java.sql.Timestamp.valueOf(user.getResetTokenExpiry()));
+            } else {
+                stm.setNull(9, java.sql.Types.TIMESTAMP);
+            }
+            stm.setInt(10, user.getId());
 
             stm.executeUpdate();
         } catch (SQLException e) {
@@ -101,6 +113,11 @@ public class UserServices implements InterfaceServices<User> {
                 user.setNumber(rs.getInt("number"));
                 user.setProfileImage(rs.getString("profileImage"));
                 user.setBanned(rs.getBoolean("banned"));
+                user.setResetToken(rs.getString("reset_token"));
+                java.sql.Timestamp resetTokenExpiry = rs.getTimestamp("reset_token_expiry");
+                if (resetTokenExpiry != null) {
+                    user.setResetTokenExpiry(resetTokenExpiry.toLocalDateTime());
+                }
 
                 users.add(user);
             }
